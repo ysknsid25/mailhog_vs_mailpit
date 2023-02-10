@@ -1,0 +1,28 @@
+version: '3'
+services:
+  app:
+    build: ./python
+    tty: true
+    volumes:
+      - ./src:/src
+  mailhog:
+    build: ./mailhog
+    tty: true
+    ports:
+      - "8026:8025"
+      - "1026:1025"
+    environment:
+      MH_STORAGE: maildir
+      MH_MAILDIR_PATH: /home/mailhog/mails
+    volumes:
+      - ./mails/mailhog:/home/mailhog/mails
+  mailpit:
+    image: axllent/mailpit
+    tty: true
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    environment:
+      MP_DATA_FILE: /home/mailpit/mails
+    volumes:
+      - ./mails/mailpit:/home/mailpit/mails
