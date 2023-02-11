@@ -24,5 +24,8 @@ services:
       - "1025:1025"
     environment:
       MP_DATA_FILE: /home/mailpit/mails
+      MP_SMTP_SSL_CERT: /keys/cert.pem
+      MP_SMTP_SSL_KEY: /keys/privkey.pem
     volumes:
       - ./mails/mailpit:/home/mailpit/mails
+      - ./keys:/keys

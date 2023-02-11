@@ -4,20 +4,31 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s:%(na
 def sendmail(host, port):
   import smtplib
   from email.mime.text import MIMEText
-  obj_smtp= smtplib.SMTP(host, port)
+  from email.mime.multipart import MIMEMultipart
+  from email.mime.application import MIMEApplication
+  smtp_obj = smtplib.SMTP(host, port)
+  # mailpitであればSMTPS, SMTP_AUTHのどちらも対応できる
+  smtp_obj.starttls()
+  # smtp_obj.login('from@office54.net', 'Password')
 
   body = "メールの本文"
-  msg = MIMEText(body, "html")
+  msg = MIMEMultipart()
   msg['Subject'] = "メールの件名"
-  msg['To'] = 'test@office54.net '
-  msg['From'] = 'example@office54.net '
+  msg['To'] = 'to@office54.net'
+  msg['From'] = 'from@office54.net '
+  msg.attach(MIMEText(body))
 
-  obj_smtp.send_message(msg)
-  obj_smtp.quit()
+  with open(r"/src/img/1MB.jpeg", "rb") as f:
+      attachment = MIMEApplication(f.read())
 
-logging.info("mailhog begin")
-sendmail("mailhog", 1026)
-logging.info("mailhog end")
+  attachment.add_header("Content-Disposition", "attachment", filename="1MB.jpeg")
+  msg.attach(attachment)
+  smtp_obj.send_message(msg)
+  smtp_obj.quit()
+
+# logging.info("mailhog begin")
+# sendmail("mailhog", 1026)
+# logging.info("mailhog end")
 logging.info("mailpit begin")
 sendmail("mailpit", 1025)
 logging.info("mailpit end")
