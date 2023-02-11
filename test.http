@@ -1,0 +1,14 @@
+### mailpit
+
+### GET MESSAGE LIST
+GET http://127.0.0.1:8025/api/v1/messages
+
+### GET MESSAGE
+GET http://127.0.0.1:8025/api/v1/message/4067ddc0-a6e9-4905-bec6-52ffc8aa8307
+
+### DELETE MESSAGE
+DELETE http://127.0.0.1:8025/api/v1/messages
+
+{
+  "ids": ["4067ddc0-a6e9-4905-bec6-52ffc8aa8307"]
+}
