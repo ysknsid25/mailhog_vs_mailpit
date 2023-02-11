@@ -7,7 +7,7 @@ def sendmail(host, port):
   from email.mime.multipart import MIMEMultipart
   from email.mime.application import MIMEApplication
   smtp_obj = smtplib.SMTP(host, port)
-  # mailpitであればSMTPS, SMTP_AUTHのどちらも対応できる
+  # mailpitのみSMTPS, SMTP_AUTHのどちらも設定している
   # smtp_obj.starttls()
   # smtp_obj.login('user', 'pass')
 
@@ -26,9 +26,9 @@ def sendmail(host, port):
   smtp_obj.send_message(msg)
   smtp_obj.quit()
 
-# logging.info("mailhog begin")
-# sendmail("mailhog", 1026)
-# logging.info("mailhog end")
+logging.info("mailhog begin")
+sendmail("mailhog", 1026)
+logging.info("mailhog end")
 logging.info("mailpit begin")
 sendmail("mailpit", 1025)
 logging.info("mailpit end")
