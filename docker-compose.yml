@@ -24,8 +24,10 @@ services:
       - "1025:1025"
     environment:
       MP_DATA_FILE: /home/mailpit/mails
-      MP_SMTP_SSL_CERT: /keys/cert.pem
-      MP_SMTP_SSL_KEY: /keys/privkey.pem
+      # SMTPS, SMTP_AUTHに対応したらコメントを外す
+      # MP_SMTP_SSL_CERT: /keys/cert.pem
+      # MP_SMTP_SSL_KEY: /keys/privkey.pem
+      # MP_SMTP_AUTH_FILE: /keys/.htpasswd
     volumes:
       - ./mails/mailpit:/home/mailpit/mails
       - ./keys:/keys

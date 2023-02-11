@@ -8,8 +8,8 @@ def sendmail(host, port):
   from email.mime.application import MIMEApplication
   smtp_obj = smtplib.SMTP(host, port)
   # mailpitであればSMTPS, SMTP_AUTHのどちらも対応できる
-  smtp_obj.starttls()
-  # smtp_obj.login('from@office54.net', 'Password')
+  # smtp_obj.starttls()
+  # smtp_obj.login('user', 'pass')
 
   body = "メールの本文"
   msg = MIMEMultipart()
